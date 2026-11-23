@@ -198,13 +198,50 @@ def build_documents(config, run):
     latex(r'La figura~\ref{fig:capm_scatter} muestra la dispersión de los excesos mensuales alrededor de cada recta estimada. El eje horizontal es común y la escala vertical varía entre paneles.')
     figure('capm_scatter_usd.png', 'Regresiones temporales del CAPM por activo.')
     page(); heading('Limitaciones y conclusiones')
-    paragraph(f'La comparación se limita a {count} meses y a una referencia bursátil estadounidense, que puede dejar fuera riesgos de tipos, divisas y materias primas. Los precios pueden revisarse y los cierres de los mercados y del FX ocurren a horas distintas.')
-    paragraph(f'El poder explicativo del mercado varía entre instrumentos. El CAPM recoge un {pct(alpha.loc[highest, "r_squared"])} de la variación mensual del exceso de rentabilidad de {highest} y un {pct(alpha.loc[lowest, "r_squared"])} en {lowest}. El ajuste desigual delimita el alcance de una referencia bursátil común para una cartera con exposiciones heterogéneas.')
+    paragraph(
+        f'La prima de mercado de EE. UU. tiene una capacidad explicativa distinta según el activo. '
+        f'El CAPM recoge el {pct(alpha.loc[highest, "r_squared"])} de la variación mensual del exceso '
+        f'de rentabilidad de {highest} y el {pct(alpha.loc[lowest, "r_squared"])} en {lowest}.'
+    )
+    if highest == 'Bolsa mundial' and lowest == 'Oro PPFB':
+        paragraph(
+            'El ajuste de IUSQ es coherente con que la renta variable mundial y la estadounidense '
+            'compartan movimientos bursátiles. En el oro queda casi toda la variación por explicar. '
+            'Los tipos reales y el dólar son canales plausibles, aunque estas regresiones solo estiman '
+            'la relación con la prima bursátil.'
+        )
     portfolio_p = alpha.loc['Cartera', 'p_value']
     ff_p = ff_terms.loc['alpha', 'p_value']
-    paragraph(f'En la cartera, el alfa CAPM es {pct(alpha.loc["Cartera", "coefficient"])} mensual (p = {pval(portfolio_p)}) y el alfa FF3 es {pct(ff_terms.loc["alpha", "coefficient"])} (p = {pval(ff_p)}), con inferencia OLS. ' + ('Ambas estimaciones son compatibles con un alfa nulo al 5 %.' if min(portfolio_p, ff_p) >= .05 else 'La significación se interpreta para esta cartera y este periodo.'))
-    criteria_summary = 'AIC y BIC favorecen el CAPM.' if (comparison.iloc[0][['aic', 'bic']] < comparison.iloc[1][['aic', 'bic']]).all() else 'AIC y BIC complementan la comparación del ajuste penalizado.'
-    paragraph(f'Al incorporar tamaño y valor, el R² bruto pasa de {num(restricted_r2)} a {num(full_r2)} y el ajustado {change}. {criteria_summary} El contraste conjunto (p = {pval(joint_p)}) evalúa la contribución adicional de ambos factores bajo los supuestos convencionales. Su alcance se limita a la cartera, al periodo y a los factores estadounidenses utilizados.')
+    alpha_summary = (
+        'Ambas estimaciones son compatibles con un alfa nulo al 5 %.'
+        if min(portfolio_p, ff_p) >= .05 else
+        'Los valores p corresponden a contrastes individuales de cada alfa frente a cero.'
+    )
+    paragraph(
+        f'La beta de la cartera es {num(portfolio_beta)}. Un aumento de un punto porcentual en la prima mensual '
+        f'de mercado se asocia con un cambio estimado de {num(portfolio_beta, 2)} puntos porcentuales en el exceso '
+        f'de rentabilidad de la cartera. El alfa mensual es {pct(alpha.loc["Cartera", "coefficient"])} con CAPM '
+        f'(p = {pval(portfolio_p)}) y {pct(ff_terms.loc["alpha", "coefficient"])} con FF3 (p = {pval(ff_p)}). '
+        f'{alpha_summary}'
+    )
+    capm_preferred = (comparison.iloc[0][['aic', 'bic']] < comparison.iloc[1][['aic', 'bic']]).all()
+    criteria_summary = 'AIC y BIC también favorecen el CAPM.' if capm_preferred else ''
+    model_summary = (
+        'Para describir esta cartera en la muestra, la evidencia favorece el CAPM como especificación más sencilla.'
+        if delta < 0 and capm_preferred and joint_p >= .05 else ''
+    )
+    paragraph(' '.join(filter(None, [
+        f'Al incorporar tamaño y valor, el R² bruto pasa de {num(restricted_r2)} a {num(full_r2)} y el ajustado '
+        f'pasa de {num(comparison.iloc[0].adj_r_squared)} a {num(comparison.iloc[1].adj_r_squared)}.',
+        criteria_summary,
+        f'Con p = {pval(joint_p)}, al 5 % {joint_result} que ambos coeficientes sean cero bajo los supuestos de OLS convencional.',
+        model_summary,
+    ])))
+    paragraph(
+        f'Las conclusiones corresponden a {count} meses y a una referencia bursátil estadounidense, '
+        'que recoge de forma parcial los riesgos de tipos, divisas y materias primas. Los precios pueden '
+        'revisarse y los cierres de los activos y del mercado de divisas ocurren a horas distintas.'
+    )
     heading('Disponibilidad de datos y reproducibilidad')
     paragraph('El código de Python genera las estimaciones y las figuras. El libro complementario contiene los datos mensuales, los pesos, las fórmulas de conversión y rentabilidad, y los resultados de las regresiones exportados como valores. Una modificación de las entradas requiere volver a ejecutar el análisis en Python para actualizar las estimaciones y el informe.')
     latex(r'En el repositorio del trabajo se incluyen el código, el libro en \texttt{reports/} y las tablas en \texttt{reports/tables/}. La \href{https://github.com/jaimeeblancoo/beyond-beta/blob/main/docs/reviewer_guide.md}{guía de reproducción} distingue el recálculo desde los datos mensuales entregados (\texttt{python scripts/verify\_delivery.py}) de la regeneración a partir de las fuentes diarias y la copia original de factores, de custodia local.')

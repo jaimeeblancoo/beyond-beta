@@ -336,13 +336,15 @@ La estimación HAC usa 3 retardos. HAC mantiene la clasificación nominal de los
 En ACS, el valor p pasa de 0,0176 a 0,0450 y queda cerca del umbral. La muestra y la multiplicidad de contrastes limitan la inferencia.
 
 \Needspace{7\baselineskip}\section{Limitaciones y conclusiones}
-La comparación se limita a 60 meses y a una referencia bursátil estadounidense, que puede dejar fuera riesgos de tipos, divisas y materias primas. Los precios pueden revisarse y los cierres de los mercados y del FX ocurren a horas distintas.
+La prima de mercado de EE. UU. tiene una capacidad explicativa distinta según el activo. El CAPM recoge el 92,10 \% de la variación mensual del exceso de rentabilidad de Bolsa mundial y el 2,35 \% en Oro PPFB.
 
-El poder explicativo del mercado varía entre instrumentos. El CAPM recoge un 92,10 \% de la variación mensual del exceso de rentabilidad de Bolsa mundial y un 2,35 \% en Oro PPFB. La referencia estadounidense recoge buena parte de la variación del ETF mundial y muy poca de la variación del oro.
+El ajuste de IUSQ es coherente con que la renta variable mundial y la estadounidense compartan movimientos bursátiles. En el oro queda casi toda la variación por explicar. Los tipos reales y el dólar son canales plausibles, aunque estas regresiones solo estiman la relación con la prima bursátil.
 
-En la cartera, el alfa CAPM es -0,21 \% mensual (p = 0,6691) y el alfa FF3 es -0,04 \% (p = 0,9437), con inferencia OLS. Ambas estimaciones son compatibles con un alfa nulo al 5 \%.
+La beta de la cartera es 0,7888. Un aumento de un punto porcentual en la prima mensual de mercado se asocia con un cambio estimado de 0,79 puntos porcentuales en el exceso de rentabilidad de la cartera. El alfa mensual es -0,21 \% con CAPM (p = 0,6691) y -0,04 \% con FF3 (p = 0,9437). Ambas estimaciones son compatibles con un alfa nulo al 5 \%.
 
-Al incorporar tamaño y valor, el R\textsuperscript{2} bruto pasa de 0,4969 a 0,5110 y el ajustado baja. AIC y BIC favorecen el CAPM. El contraste conjunto (p = 0,4500) evalúa la contribución adicional de ambos factores bajo los supuestos convencionales. Su alcance se limita a la cartera, al periodo y a los factores estadounidenses utilizados.
+Al incorporar tamaño y valor, el R\textsuperscript{2} bruto pasa de 0,4969 a 0,5110 y el ajustado pasa de 0,4882 a 0,4848. AIC y BIC también favorecen el CAPM. Con p = 0,4500, al 5 \% no se rechaza que ambos coeficientes sean cero bajo los supuestos de OLS convencional. Para describir esta cartera en la muestra, la evidencia favorece el CAPM como especificación más sencilla.
+
+Las conclusiones corresponden a 60 meses y a una referencia bursátil estadounidense, que recoge de forma parcial los riesgos de tipos, divisas y materias primas. Los precios pueden revisarse y los cierres de los activos y del mercado de divisas ocurren a horas distintas.
 
 \Needspace{7\baselineskip}\section{Disponibilidad de datos y reproducibilidad}
 El código de Python genera las estimaciones y las figuras a partir de las series mensuales. Esta edición publica las estimaciones, las estadísticas descriptivas y las correlaciones agregadas. Los datos de origen y el libro completo se custodian con los materiales de evaluación.
