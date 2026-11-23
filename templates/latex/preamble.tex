@@ -1,0 +1,48 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm,headheight=15pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}
+\usepackage[spanish,es-tabla,es-nolists,es-lcroman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs,tabularx,longtable,array}
+\usepackage[table]{xcolor}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{xurl}
+\usepackage[unicode,hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{needspace}
+\definecolor{ink}{HTML}{243B53}
+\definecolor{muted}{HTML}{526475}
+\definecolor{light}{HTML}{EFF3F6}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{muted}Beyond Beta}
+\fancyhead[R]{\small\sffamily\color{muted}Inversiones Financieras}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{2em}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.23}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\titleformat{\section}{\large\sffamily\bfseries\color{ink}}{\thesection}{.7em}{}
+\titleformat{\subsection}{\normalsize\sffamily\bfseries\color{ink}}{\thesubsection}{.7em}{}
+\titlespacing*{\section}{0pt}{14pt}{8pt}
+\captionsetup{font=small,labelfont=bf,skip=6pt,hypcap=false}
+\setlist[itemize]{leftmargin=1.4em,itemsep=3pt,topsep=4pt}
+\setcounter{secnumdepth}{2}
+\widowpenalty=10000
+\clubpenalty=10000
+
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{0em}{2.7em}}
+\makeatother

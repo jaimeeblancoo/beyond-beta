@@ -1,0 +1,174 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+\geometry{paperwidth=256mm,paperheight=144mm}
+\usepackage{fontspec}
+\setsansfont{Latin Modern Sans}
+\usefonttheme{professionalfonts}
+\usepackage{unicode-math}
+\setmathfont{latinmodern-math.otf}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amsmath,booktabs,graphicx}
+\definecolor{navy}{HTML}{183650}
+\definecolor{accent}{HTML}{B37435}
+\definecolor{muted}{HTML}{536477}
+\setbeamercolor{normal text}{fg=navy,bg=white}
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{structure}{fg=accent}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamersize{text margin left=11mm,text margin right=11mm}
+\setbeamerfont{frametitle}{size=\fontsize{27}{32}\selectfont,series=\bfseries}
+\setbeamertemplate{frametitle}{\vspace{4mm}\insertframetitle\par\vspace{2mm}\textcolor{accent}{\rule{22mm}{1pt}}}
+\newcommand{\maincount}{10}
+\newcommand{\backuptotal}{6}
+\setbeamertemplate{footline}{\hspace{11mm}{\fontsize{10}{12}\selectfont\color{muted}Beyond Beta\hfill
+\ifnum\value{framenumber}>10 Respaldo \number\numexpr\value{framenumber}-10\relax/\backuptotal
+\else\insertframenumber/\maincount\fi\hspace{11mm}}\vspace{3mm}}
+\newcommand{\slide}[2]{\begin{frame}{#1}\fontsize{22}{27}\selectfont #2\end{frame}}
+\newcommand{\captionline}[1]{\par\vspace{1mm}{\fontsize{13}{16}\selectfont\color{muted}#1\par}}
+\newcommand{\chart}[2]{\centering\includegraphics[width=\linewidth,height=86mm,keepaspectratio]{figures/#1.pdf}\captionline{#2}}
+\newcommand{\backtable}[1]{{\fontsize{17}{21}\selectfont\renewcommand{\arraystretch}{1.35}#1}}
+\hypersetup{pdftitle={El CAPM y los modelos multifactoriales en la práctica},pdfauthor={Alonso Castro Freibott, Pablo Caonabo Crespo de la Cruz, Carlos Segovia Domínguez y Jaime Blanco González}}
+\begin{document}
+\begin{frame}\relax
+{\fontsize{17}{21}\selectfont\color{accent}BEYOND BETA}\hfill{\fontsize{17}{21}\selectfont CUNEF Universidad}\par\vspace{5mm}
+{\fontsize{35}{40}\selectfont\bfseries El CAPM y los modelos\\multifactoriales en la práctica\par}\vspace{5mm}
+{\fontsize{23}{28}\selectfont ¿Qué explica el mercado y qué añade FF3?\par}\vspace{7mm}
+{\fontsize{17}{22}\selectfont Alonso Castro Freibott · Pablo Caonabo Crespo de la Cruz\par Carlos Segovia Domínguez · Jaime Blanco González\par
+Inversiones Financieras\par
+Profesor: Javier Fernández Sánchez de la Viña\par}
+\end{frame}
+
+\section{Datos}
+\slide{Seis activos para comparar exposiciones}{
+\begin{columns}[T]
+\begin{column}{.55\linewidth}
+\backtable{\begin{tabular}{ll}\toprule Activo & Tipo\\\midrule
+ACS, Nike, Roblox & Acciones individuales\\
+PPFB & ETC de oro físico\\
+EUNH & ETF de bonos soberanos\\
+IUSQ & ETF de bolsa mundial\\\bottomrule\end{tabular}}
+\end{column}
+\begin{column}{.41\linewidth}
+\textbf{@@NPRICES@@ precios, @@NRETURNS@@ retornos}\par\vspace{3mm}
+@@PRICEWINDOW@@\par\vspace{3mm}
+Yahoo Finance y factores de Fama--French\par
+\end{column}
+\end{columns}\vspace{5mm}
+Selección ilustrativa de acciones, oro y bonos con una referencia bursátil común.
+\captionline{IUSQ cotiza en EUR y mantiene la exposición a las divisas de sus inversiones.}
+}
+\slide{Una muestra común en USD para estimar el CAPM}{
+\[\begin{gathered}E(R_i)=R_f+\beta_i[E(R_M)-R_f]\\[2mm]
+R_{i,t}-RF_t=\alpha_i+\beta_i(Mkt-RF)_t+\varepsilon_{i,t}\end{gathered}\]
+\begin{columns}[T]
+\begin{column}{.31\linewidth}
+\textbf{Muestra}\par\vspace{2mm}
+Último cierre ajustado de cada mercado y mes. Muestra mensual común.
+\end{column}
+\begin{column}{.31\linewidth}
+\textbf{Moneda}\par\vspace{2mm}
+Precios en USD. Cambio de la fecha del cierre o de la última fecha disponible anterior.
+\end{column}
+\begin{column}{.31\linewidth}
+\textbf{Estimación}\par\vspace{2mm}
+OLS mensual con intercepto y prima de mercado de EE. UU.
+\end{column}
+\end{columns}
+\captionline{@@RETURNWINDOW@@. RF ya es mensual. Mkt-RF es la prima de mercado, no el retorno total.}
+}
+
+\section{Resultados}
+\slide{Trayectorias de los activos y la cartera}{
+\chart{wealth}{USD, base 100. Cartera: @@WEIGHTS_SHORT@@, rebalanceo mensual, sin costes ni impuestos. Precios ajustados de Yahoo Finance.}
+}
+\slide{Rentabilidad y volatilidad anualizadas}{
+\chart{risk_return}{La volatilidad resume el riesgo total observado. La beta de la siguiente diapositiva mide sensibilidad al mercado.}
+}
+\slide{Alfa y beta responden a preguntas distintas}{
+\chart{capm_intervals}{Alfa: desviación media mensual. Beta: sensibilidad del exceso del activo a un punto porcentual adicional del factor. Barras: IC del 95\,\% frente a cero.}
+}
+\slide{La distancia a la SML mide el alfa de Jensen}{
+\chart{sml}{Medias aritméticas mensuales USD. Relleno: alfa significativo; cuadrado: beta no significativa. OLS al 5\%.}
+}
+\slide{Cartera: @@CAGR@@ anual y @@DRAWDOWN@@ de caída máxima}{
+\begin{columns}[T]
+\begin{column}{.69\linewidth}
+\includegraphics[width=\linewidth,height=80mm,keepaspectratio]{figures/drawdown.pdf}
+\end{column}
+\begin{column}{.28\linewidth}
+\textbf{@@CUMULATIVE@@}\par acumulado\par\vspace{5mm}
+\textbf{@@VOL@@}\par volatilidad anual\par\vspace{5mm}
+\textbf{@@DRAWDOWN@@}\par caída máxima entre cierres
+\end{column}\end{columns}
+\captionline{@@PORTFOLIO@@, rebalanceo mensual. Sin costes de negociación ni impuestos. Caída desde el máximo, incluyendo riqueza inicial.}
+}
+\slide{@@FF_TITLE@@}{
+\begin{columns}[T]
+\begin{column}{.61\linewidth}
+\includegraphics[width=\linewidth,height=80mm,keepaspectratio]{figures/ff3_exposures.pdf}
+\end{column}
+\begin{column}{.36\linewidth}
+\textbf{R\textsuperscript{2} ajustado}\par
+CAPM: @@CAPM_ADJ@@\par FF3: @@FF_ADJ@@\par\vspace{4mm}
+\textbf{SMB}\, Pequeñas menos grandes.\par\vspace{2mm}
+\textbf{HML}\, Alto menos bajo valor contable/mercado.
+\end{column}\end{columns}
+\captionline{@@FACTOR_FINDING@@. Las barras muestran IC del 95\,\% para las exposiciones condicionales.}
+}
+\section{Conclusiones}
+\slide{@@CONCLUSION_TITLE@@}{
+\begin{enumerate}
+\item @@CONCLUSION_ALPHA@@
+\item Cartera: @@CAGR@@ geométrico anual y caída máxima entre cierres mensuales de @@DRAWDOWN@@.
+\item @@CONCLUSION_FF@@
+\end{enumerate}\vspace{4mm}
+\textcolor{accent}{Límites:} @@NRETURNS@@ meses, factores de EE. UU. y cierres no simultáneos.
+\captionline{Los resultados describen asociaciones históricas.}
+}
+
+\appendix
+\section{Respaldo}
+\slide{A1 · CAPM completo de los seis activos}{
+\backtable{\begin{tabular}{lrrrrr}\toprule Activo & $\alpha$ mes (\%) & $p_\alpha$ & $\beta$ & $p_\beta$ & $R^2$\\\midrule
+@@CAPM_ROWS@@
+\bottomrule\end{tabular}}
+\captionline{OLS con intercepto, @@NRETURNS@@ meses. IC95\% de alfa y beta: diapositiva 6. Tablas completas: CAPM del Excel y capm.csv.}
+}
+\slide{A2 · OLS frente a HAC}{
+\backtable{\begin{tabular}{lrrr}\toprule Activo & $p_\alpha$ OLS & $p_\alpha$ HAC & IC95\% HAC de $\alpha$ (\%/mes)\\\midrule
+@@HAC_ROWS@@
+\bottomrule\end{tabular}}
+\captionline{Newey--West, Bartlett, @@LAGS@@ retardos, corrección de muestra y distribución t. @@HAC_FINDING@@}
+}
+\slide{A3 · FF3 y CAPM sobre la misma cartera}{
+\backtable{\begin{tabular}{lrrrr}\toprule Término & Estimación & $p$ OLS & IC95\% OLS & $p$ HAC\\\midrule
+@@FF_ROWS@@
+\bottomrule\end{tabular}}\vspace{3mm}
+\backtable{\begin{tabular}{lrrrr}\toprule Modelo & $R^2$ & $R^2$ ajustado & AIC & BIC\\\midrule
+@@COMPARISON_ROWS@@
+\bottomrule\end{tabular}}
+\captionline{Alfa en \%/mes. Contraste OLS conjunto de $H_0:\beta_{\mathrm{SMB}}=\beta_{\mathrm{HML}}=0$: $F(2,@@FF_DF@@)=@@FF_F@@$, $p=@@FF_JOINT_P@@$.}
+}
+\slide{A4 · Rentabilidades, moneda y SML}{
+\[P^{USD}_{i,t}=P^{EUR}_{i,t}X_{i,t},\qquad X=\text{USD por EUR}\]
+\[R^{USD}_{i,t}=(1+R^{EUR}_{i,t})\frac{X_{i,t}}{X_{i,t-1}}-1\]
+\[\overline R_i^{SML}=\overline {RF}+\widehat\beta_i\,\overline {Mkt-RF}\]
+\[\overline R_i-\overline R_i^{SML}=\widehat\alpha_i\]
+\captionline{@@FX_TOLERANCE@@ días de antigüedad FX permitidos, @@FX_ACTUAL@@ observados. No se divide una rentabilidad por un nivel de cambio. La SML usa medias aritméticas.}
+}
+\slide{A5 · Diversificación y rebalanceo}{
+\(R_{p,t}=\sum_i w_iR_{i,t}\), con @@WEIGHTS_SHORT@@. \quad \(\widehat\beta_p=\sum_i w_i\widehat\beta_i=@@WEIGHTED_BETA@@\).
+\par\vspace{2mm}\centering
+\includegraphics[width=.70\linewidth,height=72mm,keepaspectratio]{figures/correlations.pdf}
+\captionline{Beta directa: @@PORTFOLIO_BETA@@. Mismos meses, moneda, RF y mercado. Los pesos iguales en capital no implican contribuciones iguales al riesgo.}
+}
+\slide{A6 · Fuentes y límites de interpretación}{
+\begin{itemize}
+\item Yahoo Finance vía yfinance: cierres ajustados. Fama y French: @@FACTOR_SOURCE@@.
+\item @@PRICEWINDOW@@ de precios, @@RETURNWINDOW@@ de retornos.
+\item Tipos, oro y divisas no quedan resumidos por factores bursátiles de EE. UU.
+\item @@NRETURNS@@ meses, contrastes múltiples, precios revisables y calendarios distintos.
+\end{itemize}
+\captionline{Referencia conceptual: temario de Inversiones Financieras, temas 3 y 4. Factores: \url{https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/f-f_factors.html}. Fuentes de productos en docs/sources.md.}
+}
+\end{document}

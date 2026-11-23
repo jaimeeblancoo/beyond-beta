@@ -1,0 +1,29 @@
+[sample]
+price_start = "2021-09"
+price_end = "2026-09"
+expected_prices = 61
+expected_returns = 60
+currency = "USD"
+max_fx_age_days = 4
+max_month_end_age_days = 7
+
+[assets]
+tickers = ["ACS.MC", "PPFB.DE", "NKE", "RBLX", "EUNH.DE", "IUSQ.DE"]
+names = ["ACS", "Oro PPFB", "Nike", "Roblox", "Bonos euro", "Bolsa mundial"]
+currencies = ["EUR", "EUR", "USD", "USD", "EUR", "EUR"]
+weights = [0.16666666666666666, 0.16666666666666666, 0.16666666666666666, 0.16666666666666666, 0.16666666666666666, 0.16666666666666666]
+
+[factors]
+file = "data/raw/F-F_Research_Data_Factors.csv"
+source = "Copia del profesor, base CRSP 202609"
+sha256 = "a3894d74d553cab812eabbe706bdbf443c97eb20b24b05e3e5f3ce47e46b90bb"
+url = "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip"
+
+[inference]
+primary = "OLS"
+hac_rule = "floor(4*(T/100)^(2/9))"
+
+[portfolio]
+rebalance = "monthly"
+costs = 0.0
+taxes = 0.0

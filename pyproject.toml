@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "beyond-beta"
+version = "0.1.0"
+description = "Análisis académico histórico con CAPM y Fama-French"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "pandas==3.0.1", "numpy==2.3.5", "statsmodels==0.14.6",
+  "scipy==1.16.3", "matplotlib==3.10.7", "yfinance==1.8.0",
+  "openpyxl==3.1.5"
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.2.0", "pypdf==6.21.4"]
+
+[project.scripts]
+beyond-beta = "beyond_beta.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
