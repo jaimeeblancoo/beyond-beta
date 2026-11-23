@@ -207,7 +207,7 @@ def write_report(root,blocks,directory,subtitle="",compile_pdf=True):
             short={'wealth':'Riqueza acumulada','correlations':'Correlaciones mensuales','sml':'SML histórica','risk_return':'Rentabilidad y volatilidad','capm_scatter':'Regresiones CAPM por activo'}[key]
             caption=re.sub(r'^Figura \d+\.\s*','',caption)
             fraction=min(width/490,1)
-            body.extend([r'\begin{figure}[!htbp]\centering',r'\includegraphics[width='+f'{fraction:.3f}'+r'\linewidth,keepaspectratio]{../figures/'+name+'}',r'\captionof{figure}['+short+']{'+inline(caption)+'}',r'\label{fig:'+key+'}',r'\end{figure}'])
+            body.extend([r'\par\begin{figure}[!htbp]\centering',r'\includegraphics[width='+f'{fraction:.3f}'+r'\linewidth,keepaspectratio]{../figures/'+name+'}',r'\captionof{figure}['+short+']{'+inline(caption)+'}',r'\label{fig:'+key+'}',r'\end{figure}\par'])
     if references:body.append(r'\endgroup')
     body.append(r'\end{document}')
     path=Path(directory)/'informe.tex'

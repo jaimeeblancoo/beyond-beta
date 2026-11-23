@@ -28,9 +28,11 @@ La cartera acumula **42,30 %** en USD. Registra **7,31 %** de rentabilidad geom�
 | Coeficientes e inferencia OLS y HAC | [CAPM](reports/tables/capm.csv) · [FF3](reports/tables/ff3.csv) |
 | Comparación de modelos | [R², R² ajustado, AIC y BIC](reports/tables/comparison.csv) |
 | Resultados descriptivos | [USD](reports/tables/descriptive_usd.csv) · [EUR](reports/tables/descriptive_eur.csv) · [Correlaciones](reports/tables/correlations.csv) |
-| Método y fuentes | [Metodología](docs/methodology.md) · [Fuentes](docs/sources.md) · [Guía de verificación](docs/reviewer_guide.md) |
+| Método y código | [Metodología](docs/methodology.md) · [Código Python](src/beyond_beta/) · [Fuentes](docs/sources.md) · [Guía de verificación](docs/reviewer_guide.md) |
 
-Esta edición contiene código, documentos y resultados agregados. El libro con las observaciones mensuales y los snapshots diarios se custodia con la entrega académica. La cartera se rebalancea cada mes, con peso 1/6 por activo y sin costes ni impuestos.
+Alineamos cierres ajustados mensuales, tipos de cambio y factores, calculamos las rentabilidades y estimamos ambas regresiones sobre los mismos 60 meses. La cartera se rebalancea cada mes, con peso 1/6 por activo y sin costes ni impuestos.
+
+El Excel adjunto a la entrega académica contiene las observaciones mensuales, las conversiones de divisa, las fórmulas de rentabilidad y los resultados de las regresiones exportados por Python. Aquí se pueden abrir y compilar los documentos con sus figuras agregadas, revisar el código y ejecutar pruebas con datos sintéticos. El recálculo histórico requiere el libro y las tablas mensuales privadas. Reconstruir el análisis completo requiere además los cierres diarios, los tipos de cambio y la copia de factores utilizada.
 
 ## Verificar el código
 

@@ -1,6 +1,6 @@
 # Derechos y atribución
 
-Autores del trabajo: Alonso Castro, Pablo Crespo, Carlos Segovia y Jaime Blanco.
+Autores del trabajo: Alonso Castro Freibott, Pablo Caonabo Crespo de la Cruz, Carlos Segovia Domínguez y Jaime Blanco González.
 
 El repositorio se prepara para la consulta y evaluación académica del trabajo. No se ha seleccionado ni concedido una licencia de reutilización del código o los documentos propios. Su visibilidad pública no se presenta como una licencia de código abierto. Una licencia futura debe acordarse con los titulares de las contribuciones.
 

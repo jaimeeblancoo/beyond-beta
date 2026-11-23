@@ -178,12 +178,12 @@ ACS acumuló 398,71 \% frente a -73,29 \% de Nike. Roblox combina una media mens
 
 \Needspace{7\baselineskip}\subsection{Rentabilidad y volatilidad}
 La figura~\ref{fig:risk_return} permite evaluar si los activos más volátiles también obtuvieron mayor crecimiento anualizado.
-\begin{figure}[!htbp]\centering
+\par\begin{figure}[!htbp]\centering
 \includegraphics[width=1.000\linewidth,keepaspectratio]{../figures/risk_return_usd.png}
 \captionof{figure}[Rentabilidad y volatilidad]{Volatilidad anualizada y rentabilidad anualizada geométrica en USD.}
 \label{fig:risk_return}
-\end{figure}
-La volatilidad mide la dispersión de las rentabilidades mensuales. El crecimiento depende de cómo se encadenan esas rentabilidades, de modo que una media mensual positiva puede coexistir con una pérdida acumulada. El gráfico es descriptivo. La SML relaciona rentabilidad esperada con beta, mientras que aquí se representa volatilidad total.
+\end{figure}\par
+La volatilidad resume el riesgo total observado. Este gráfico es descriptivo. La SML relaciona la rentabilidad esperada con beta, que mide la sensibilidad al mercado.
 
 \Needspace{7\baselineskip}\subsection{Diversificación y contraste en euros}
 En la figura~\ref{fig:correlations}, la correlación de Bolsa mundial con Oro PPFB es 0,2989 y con Bonos euro, 0,6875.
@@ -191,11 +191,11 @@ En esta muestra, el oro se movió menos en sintonía con la bolsa mundial que lo
 
 Los pesos iguales en capital no implican contribuciones iguales al riesgo.
 
-\begin{figure}[!htbp]\centering
+\par\begin{figure}[!htbp]\centering
 \includegraphics[width=0.837\linewidth,keepaspectratio]{../figures/correlations_usd.png}
 \captionof{figure}[Correlaciones mensuales]{Correlaciones de Pearson en los 60 meses comunes, en USD.}
 \label{fig:correlations}
-\end{figure}
+\end{figure}\par
 Cada activo forma parte de la cartera, por lo que su propia rentabilidad contribuye a la correlación que observamos entre ambos. Las correlaciones pueden cambiar fuera de la muestra. Incluso los activos poco ligados a la bolsa están expuestos a riesgos como los tipos de interés, el crédito, las materias primas o la divisa.
 
 \par\noindent\begin{minipage}{\linewidth}
@@ -273,11 +273,11 @@ Al ponderar las betas individuales se obtiene 0,7888, que coincide hasta el redo
 \overline R_i^{\mathrm{SML}}=\overline{\mathrm{RF}}+\widehat\beta_i\,\overline{\mathrm{Mkt-RF}},\qquad \overline R_i-\overline R_i^{\mathrm{SML}}=\widehat\alpha_i.
 \end{equation*}
 En la figura~\ref{fig:sml}, la distancia vertical entre cada punto y la recta mide el alfa de Jensen mensual respecto a la referencia utilizada.
-\begin{figure}[!htbp]\centering
+\par\begin{figure}[!htbp]\centering
 \includegraphics[width=1.000\linewidth,keepaspectratio]{../figures/sml_usd.png}
 \captionof{figure}[SML histórica]{SML estimada con medias históricas mensuales en USD.}
 \label{fig:sml}
-\end{figure}
+\end{figure}\par
 Para cada beta, la recta suma la media de RF y la prima media de mercado multiplicada por esa beta. Los puntos muestran las rentabilidades medias observadas en los mismos meses y en USD. Los puntos rellenos señalan alfas significativos y los cuadrados, betas no significativas al 5 \% con OLS.
 
 ACS queda por encima de la SML, y Nike y Bonos euro por debajo, con alfas OLS significativos. Las distancias reflejan rendimiento medio no recogido por la referencia del CAPM en estos meses. La elección de la referencia y los riesgos omitidos limitan la atribución de estos alfas a la habilidad de gestión.
@@ -395,6 +395,7 @@ Cartera Mkt-RF & 0,7888 & 0,1042 & 7,5681 & <0,0001 & 0,5802 & 0,9974 \\
 Se estiman 7 CAPM y un FF3, todos con intercepto y 60 meses. Los errores y resultados HAC completos están disponibles en las tablas agregadas del repositorio.
 
 \Needspace{7\baselineskip}
+\clearpage
 \section{Sensibilidad de la inferencia}
 Los residuos mensuales pueden presentar heterocedasticidad o dependencia temporal. Como comprobación, se estima la covarianza HAC con ponderaciones de Bartlett y 3 retardos. La corrección afecta a errores estándar, valores p e intervalos. Con 60 meses, la inferencia robusta sigue siendo aproximada y el contraste conjunto anterior conserva su alcance convencional.
 
