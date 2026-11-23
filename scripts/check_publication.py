@@ -31,7 +31,6 @@ def check_path(name):
         return 'environment file'
     if name in {
         'reports/figures/wealth_usd.png', 'reports/figures/capm_scatter_usd.png',
-        'reports/presentation/figures/wealth.pdf', 'reports/presentation/figures/drawdown.pdf',
     }:
         return 'figure containing observation series'
     if name.startswith('reports/') and path.suffix in {'.json', '.ndjson'}:

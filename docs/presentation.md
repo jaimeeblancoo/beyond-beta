@@ -1,6 +1,6 @@
 # Presentación
 
-La [fuente Beamer](../reports/presentation/Presentacion_Beyond_Beta.tex) de la edición pública conserva diez diapositivas principales y seis de respaldo. Las tablas y gráficos muestran estadísticas agregadas del análisis histórico.
+La [fuente Beamer](../reports/presentation/Presentacion_Beyond_Beta.tex) de la presentación de clase conserva diez diapositivas principales y seis de respaldo. Incluye la evolución de una inversión inicial de 100 USD y la caída de la cartera desde su máximo, ambas con frecuencia mensual.
 
 Desde `reports/presentation/`, con XeLaTeX y Latin Modern disponibles, ejecuta el siguiente comando tres veces.
 

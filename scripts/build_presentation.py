@@ -25,7 +25,7 @@ from beyond_beta.report import span
 COLORS = ['#2868A6', '#B38023', '#875597', '#B55158', '#458875', '#6C778A']
 NAVY = '#183650'
 SOURCES = ['scripts/build_presentation.py', 'templates/beamer/presentation.tex',
-           'templates/latex/preamble.tex', 'src/beyond_beta/latex.py']
+           'templates/latex/preamble.tex', 'templates/branding/cunef-eps.jpeg', 'src/beyond_beta/latex.py']
 TABLES = ['returns_usd', 'descriptive_usd', 'capm', 'ff3', 'comparison', 'correlations']
 
 

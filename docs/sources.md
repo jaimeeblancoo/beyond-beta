@@ -8,7 +8,7 @@ Yahoo Finance, históricos por ticker: https://finance.yahoo.com/
 
 API utilizada: https://ranaroussi.github.io/yfinance/reference/api/yfinance.download.html
 
-El proyecto yfinance distingue su licencia de software de los derechos sobre los datos y remite a las condiciones de Yahoo; señala uso personal de la API. No se interpreta la licencia del paquete como permiso para publicar históricos. Se guardan precios y resultados que contienen fuentes en carpetas ignoradas por Git. La [ayuda oficial de Yahoo Finance](https://help.yahoo.com/kb/account/SLN2310.html) limita la redistribución de la información suministrada. La edición pública conserva resultados agregados. Los precios, los tipos de cambio y las series mensuales individualizadas se custodian localmente.
+El proyecto yfinance distingue su licencia de software de los derechos sobre los datos y remite a las condiciones de Yahoo; señala uso personal de la API. No se interpreta la licencia del paquete como permiso para publicar históricos. Se guardan precios y resultados que contienen fuentes en carpetas ignoradas por Git. La [ayuda oficial de Yahoo Finance](https://help.yahoo.com/kb/account/SLN2310.html) limita la redistribución de la información suministrada. La edición publica tablas con resultados agregados y los gráficos de riqueza normalizada y caída de la cartera. Los archivos con precios, tipos de cambio y rentabilidades mensuales individuales se custodian localmente.
 
 Fuente: https://github.com/ranaroussi/yfinance
 

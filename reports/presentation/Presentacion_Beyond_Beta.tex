@@ -30,7 +30,7 @@
 \hypersetup{pdftitle={El CAPM y los modelos multifactoriales en la práctica},pdfauthor={Alonso Castro Freibott, Pablo Caonabo Crespo de la Cruz, Carlos Segovia Domínguez y Jaime Blanco González}}
 \begin{document}
 \begin{frame}\relax
-{\fontsize{17}{21}\selectfont\color{accent}BEYOND BETA}\hfill{\fontsize{17}{21}\selectfont CUNEF Universidad}\par\vspace{5mm}
+{\fontsize{17}{21}\selectfont\color{accent}BEYOND BETA}\hfill\includegraphics[width=73mm]{../../templates/branding/cunef-eps.jpeg}\par\vspace{5mm}
 {\fontsize{35}{40}\selectfont\bfseries El CAPM y los modelos\\multifactoriales en la práctica\par}\vspace{5mm}
 {\fontsize{23}{28}\selectfont ¿Qué explica el mercado y qué añade FF3?\par}\vspace{7mm}
 {\fontsize{17}{22}\selectfont Alonso Castro Freibott · Pablo Caonabo Crespo de la Cruz\par Carlos Segovia Domínguez · Jaime Blanco González\par
@@ -78,47 +78,29 @@ OLS mensual con intercepto y prima de mercado de EE. UU.
 }
 
 \section{Resultados}
-\slide{La cartera termina con 142,30 USD por cada 100 invertidos}{
-\begin{columns}[T]
-\begin{column}{.57\linewidth}
-\backtable{\begin{tabular}{lr}\toprule Activo & Valor final (USD)\\\midrule
-ACS & 498,71 \\
-Oro PPFB & 234,17 \\
-Nike & 26,71 \\
-Roblox & 56,08 \\
-Bonos euro & 84,02 \\
-Bolsa mundial & 172,91 \\\midrule
-Cartera & 142,30 \\\bottomrule
-\end{tabular}}
-\end{column}
-\begin{column}{.39\linewidth}
-Inversión inicial de 100 USD en septiembre de 2021.\par\vspace{5mm}
-Cartera con 1/6 por activo y rebalanceo mensual.
-\end{column}
-\end{columns}
-\captionline{Valores al cierre de septiembre de 2026. Sin costes ni impuestos.}
+\slide{Trayectorias de los activos y la cartera}{
+\chart{wealth}{USD, base 100. Cartera: 1/6 por activo, rebalanceo mensual, sin costes ni impuestos. Precios ajustados de Yahoo Finance.}
 }
 \slide{Rentabilidad y volatilidad anualizadas}{
 \chart{risk_return}{La volatilidad resume el riesgo total observado. La beta de la siguiente diapositiva mide sensibilidad al mercado.}
 }
 \slide{Alfa y beta responden a preguntas distintas}{
-\chart{capm_intervals}{Alfa: desviación media mensual. Beta: sensibilidad del exceso del activo a un punto porcentual adicional del factor. Barras: IC del 95\,\% por OLS. La línea discontinua marca cero.}
+\chart{capm_intervals}{Alfa: desviación media mensual. Beta: sensibilidad del exceso del activo a un punto porcentual adicional del factor. Barras: IC del 95\,\% frente a cero.}
 }
 \slide{La distancia a la SML mide el alfa de Jensen}{
 \chart{sml}{Medias aritméticas mensuales USD. Relleno: alfa significativo; cuadrado: beta no significativa. OLS al 5\%.}
 }
 \slide{Cartera: 7,31 \% anual y -31,88 \% de caída máxima}{
 \begin{columns}[T]
-\begin{column}{.46\linewidth}
-\textbf{42,30 \%}\par acumulado\par\vspace{9mm}
-\textbf{17,91 \%}\par volatilidad anual
+\begin{column}{.69\linewidth}
+\includegraphics[width=\linewidth,height=80mm,keepaspectratio]{figures/drawdown.pdf}
 \end{column}
-\begin{column}{.46\linewidth}
-\textbf{7,31 \%}\par rentabilidad geométrica anual\par\vspace{9mm}
+\begin{column}{.28\linewidth}
+\textbf{42,30 \%}\par acumulado\par\vspace{5mm}
+\textbf{17,91 \%}\par volatilidad anual\par\vspace{5mm}
 \textbf{-31,88 \%}\par caída máxima entre cierres
-\end{column}
-\end{columns}\vspace{8mm}
-\captionline{USD. Cartera equiponderada con rebalanceo mensual, sin costes ni impuestos.}
+\end{column}\end{columns}
+\captionline{Cartera equiponderada, rebalanceo mensual. Sin costes de negociación ni impuestos. Caída desde el máximo, incluyendo riqueza inicial.}
 }
 \slide{FF3 no mejora el R\textsuperscript{2} ajustado}{
 \begin{columns}[T]
