@@ -136,9 +136,19 @@ def build_documents(config, run):
     negative = list(alpha.index[(alpha.p_value < .05) & (alpha.coefficient < 0)])
     for sign, names in [('positivo', positive), ('negativo', negative)]:
         if names:
-            paragraph(f'Alfa {sign} y significativo al 5 % con OLS en ' + ', '.join(names) + '.')
+            paragraph(f'Alfa {sign} y significativo al 5 % nominal con OLS en ' + ' y '.join(names) + '.')
     if not positive and not negative:
         paragraph('Ningún alfa CAPM resulta significativo al 5 % con OLS.')
+    significant_betas = beta.loc[assets['names'], 'p_value'] < .05
+    market_assets = significant_betas[significant_betas].index.tolist()
+    if market_assets:
+        paragraph('El contraste de beta detecta sensibilidad bursátil en '
+                  + ', '.join(market_assets[:-1]) + (' y ' if len(market_assets) > 1 else '')
+                  + market_assets[-1] + '.')
+    if 'Bonos euro' in negative:
+        paragraph('En Bonos euro, los tipos de interés y la duración de la deuda de la zona euro, la conversión '
+                  'a USD y la elección de la referencia bursátil pueden contribuir a la desviación media. '
+                  'La regresión estima esa desviación conjunta frente a la referencia utilizada.')
     lowest, highest = alpha.loc[assets['names'], 'r_squared'].agg(['idxmin', 'idxmax'])
     paragraph(f'Entre los activos, el R² va de {num(alpha.loc[lowest, "r_squared"])} en {lowest} a {num(alpha.loc[highest, "r_squared"])} en {highest}.')
     portfolio_beta = beta.loc['Cartera', 'coefficient']
@@ -147,15 +157,24 @@ def build_documents(config, run):
     paragraph(f'La beta de la cartera es {num(portfolio_beta)}. Un aumento de un punto porcentual en el exceso mensual del mercado se asocia con un cambio estimado de {num(portfolio_beta, 2)} puntos porcentuales en el exceso de la cartera.')
     highest_beta = asset_betas.idxmax()
     paragraph(f'{highest_beta} presenta la mayor beta entre los activos ({num(asset_betas.loc[highest_beta])}). La volatilidad resume el riesgo total observado. La beta mide sensibilidad al mercado y el R², la proporción de variación del exceso de rentabilidad que recoge el modelo. El residuo puede incluir riesgo específico y riesgos comunes omitidos. La diversificación tiende a reducir el componente específico.')
+    if highest_beta == 'Roblox' and alpha.loc['Roblox', 'p_value'] >= .05:
+        paragraph(f'En Roblox, el alfa es compatible con cero y el R² es {pct(alpha.loc["Roblox", "r_squared"])}. '
+                  'La sensibilidad estimada al mercado convive con una proporción elevada de variación residual.')
+    if 'Bolsa mundial' in beta.index and beta.loc['Bolsa mundial', 'p_value'] < .05 and alpha.loc['Bolsa mundial', 'p_value'] >= .05:
+        paragraph(f'En IUSQ, la beta es significativa y el alfa mensual estimado es {pct(alpha.loc["Bolsa mundial", "coefficient"])} '
+                  f'(p = {pval(alpha.loc["Bolsa mundial", "p_value"])}). El modelo explica el '
+                  f'{pct(alpha.loc["Bolsa mundial", "r_squared"])} de la variación de su exceso de rentabilidad mensual. El alfa es compatible con cero al 5 %.')
     if 'Oro PPFB' in beta.index and beta.loc['Oro PPFB', 'p_value'] >= .05:
         paragraph(f'Para Oro PPFB, la beta estimada es {num(beta.loc["Oro PPFB", "coefficient"])} (p = {pval(beta.loc["Oro PPFB", "p_value"])}). La evidencia de sensibilidad lineal al mercado es insuficiente al 5 %. El oro sigue expuesto a riesgos propios de precio y divisa.')
+    if 'Oro PPFB' in alpha.index and alpha.loc['Oro PPFB', 'p_value'] >= .05:
+        paragraph(f'El alfa de Oro PPFB también es compatible con cero (p = {pval(alpha.loc["Oro PPFB", "p_value"])}).')
     latex(rf'\Needspace{{6\baselineskip}}\[\widehat\beta_p=\sum_{{i=1}}^{{{n}}}w_i\widehat\beta_i.\]')
     paragraph(f'Al ponderar las betas individuales se obtiene {num(weighted_beta)}, que coincide hasta el redondeo con la estimación directa de la cartera. La igualdad se deriva de la linealidad de OLS con pesos constantes que suman uno y regresiones con intercepto sobre los mismos meses, moneda, RF y factor de mercado.')
     page(); heading('SML estimada con medias históricas')
     latex(r'En la figura~\ref{fig:sml}, la distancia vertical entre cada punto y la recta mide el alfa de Jensen mensual respecto a la referencia utilizada.')
     figure('sml_usd.png', 'SML estimada con medias históricas mensuales en USD.')
     paragraph('Para cada beta, la recta suma la media de RF y la prima media de mercado multiplicada por esa beta. Los puntos muestran las rentabilidades medias observadas en los mismos meses y en USD. Los puntos rellenos señalan alfas significativos y los cuadrados, betas no significativas al 5 % con OLS.')
-    paragraph('ACS queda por encima de la SML, y Nike y Bonos euro por debajo, con alfas OLS significativos. Las distancias reflejan rendimiento medio no recogido por la referencia del CAPM en estos meses. La elección de la referencia y los riesgos omitidos limitan la atribución de estos alfas a la habilidad de gestión.') if 'ACS' in alpha.index else None
+    paragraph('Las desviaciones respecto a la recta pueden reflejar exposiciones a riesgos que el modelo omite.')
     page(); heading('Rentabilidad y volatilidad')
     latex(r'La figura~\ref{fig:risk_return} permite evaluar si los activos más volátiles también obtuvieron mayor crecimiento anualizado.')
     figure('risk_return_usd.png', 'Volatilidad anualizada y rentabilidad anualizada geométrica en USD.')
@@ -166,6 +185,10 @@ def build_documents(config, run):
     paragraph('SMB mide la diferencia de rentabilidad entre carteras de empresas pequeñas y grandes. HML mide la diferencia entre carteras con un cociente valor contable sobre valor de mercado alto y bajo, respectivamente. Cada exposición mide la sensibilidad al factor manteniendo constantes los demás. Los pesos de capital se fijan al construir la cartera.')
     table(['Modelo','N','R²','R² ajustado','AIC','BIC'], [[r.model,str(int(r.n_obs)),num(r.r_squared),num(r.adj_r_squared),num(r.aic, 2),num(r.bic, 2)] for _,r in comparison.iterrows()], [90,50,80,100,85,85], 'comparison', 'Comparación CAPM y FF3')
     ff_terms = ff_ols.set_index('term')
+    ff_market_beta = ff_terms.loc['Mkt-RF', 'coefficient']
+    paragraph(f'La beta de mercado estimada pasa de {num(portfolio_beta)} en el CAPM a {num(ff_market_beta)} '
+              'en FF3, donde se estima manteniendo constantes SMB y HML. La diferencia describe el cambio de especificación '
+              'sobre la misma muestra.')
     smb, hml = ff_terms.loc['SMB'], ff_terms.loc['HML']
     if smb.coefficient > 0 and hml.coefficient < 0 and min(smb.p_value, hml.p_value) >= .05:
         paragraph('Los signos estimados apuntan a una exposición positiva al diferencial de pequeñas frente a grandes y negativa al diferencial de valor. Ambos intervalos de confianza incluyen cero, por lo que la evidencia individual al 5 % es insuficiente para atribuir a la cartera una orientación por tamaño o estilo.')

@@ -35,7 +35,6 @@ reports/presentation/*
 !reports/figures/*.png
 !reports/tables/
 !reports/tables/*.csv
-!reports/Resultados_Beyond_Beta.xlsx
 # Never publish compilation by-products, archives or run-specific manifests.
 reports/**/*.aux
 reports/**/*.log

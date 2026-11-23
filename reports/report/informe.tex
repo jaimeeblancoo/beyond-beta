@@ -253,9 +253,13 @@ Cartera & -0,21 \% & 0,6691 & 0,7888 & <0,0001 & 0,4969 & 0,4882 \\
 \endgroup
 \par\medskip
 \end{minipage}\par\medskip
-Alfa positivo y significativo al 5 \% con OLS en ACS.
+Alfa positivo y significativo al 5 \% nominal con OLS en ACS.
 
-Alfa negativo y significativo al 5 \% con OLS en Nike, Bonos euro.
+Alfa negativo y significativo al 5 \% nominal con OLS en Nike y Bonos euro.
+
+El contraste de beta detecta sensibilidad bursátil en ACS, Nike, Roblox, Bonos euro y Bolsa mundial.
+
+En Bonos euro, los tipos de interés y la duración de la deuda de la zona euro, la conversión a USD y la elección de la referencia bursátil pueden contribuir a la desviación media. La regresión estima esa desviación conjunta frente a la referencia utilizada.
 
 Entre los activos, el R\textsuperscript{2} va de 0,0235 en Oro PPFB a 0,9210 en Bolsa mundial.
 
@@ -263,7 +267,13 @@ La beta de la cartera es 0,7888. Un aumento de un punto porcentual en el exceso 
 
 Roblox presenta la mayor beta entre los activos (1,5136). La volatilidad resume el riesgo total observado. La beta mide sensibilidad al mercado y el R\textsuperscript{2}, la proporción de variación del exceso de rentabilidad que recoge el modelo. El residuo puede incluir riesgo específico y riesgos comunes omitidos. La diversificación tiende a reducir el componente específico.
 
+En Roblox, el alfa es compatible con cero y el R\textsuperscript{2} es 13,86 \%. La sensibilidad estimada al mercado convive con una proporción elevada de variación residual.
+
+En IUSQ, la beta es significativa y el alfa mensual estimado es 0,01 \% (p = 0,9681). El modelo explica el 92,10 \% de la variación de su exceso de rentabilidad mensual.
+
 Para Oro PPFB, la beta estimada es 0,1649 (p = 0,2423). La evidencia de sensibilidad lineal al mercado es insuficiente al 5 \%. El oro sigue expuesto a riesgos propios de precio y divisa.
+
+El alfa de Oro PPFB también es compatible con cero (p = 0,0896).
 
 \Needspace{6\baselineskip}\[\widehat\beta_p=\sum_{i=1}^{6}w_i\widehat\beta_i.\]
 Al ponderar las betas individuales se obtiene 0,7888, que coincide hasta el redondeo con la estimación directa de la cartera. La igualdad se deriva de la linealidad de OLS con pesos constantes que suman uno y regresiones con intercepto sobre los mismos meses, moneda, RF y factor de mercado.
@@ -280,7 +290,7 @@ En la figura~\ref{fig:sml}, la distancia vertical entre cada punto y la recta mi
 \end{figure}\par
 Para cada beta, la recta suma la media de RF y la prima media de mercado multiplicada por esa beta. Los puntos muestran las rentabilidades medias observadas en los mismos meses y en USD. Los puntos rellenos señalan alfas significativos y los cuadrados, betas no significativas al 5 \% con OLS.
 
-ACS queda por encima de la SML, y Nike y Bonos euro por debajo, con alfas OLS significativos. Las distancias reflejan rendimiento medio no recogido por la referencia del CAPM en estos meses. La elección de la referencia y los riesgos omitidos limitan la atribución de estos alfas a la habilidad de gestión.
+Las desviaciones respecto a la recta pueden reflejar exposiciones a riesgos que el modelo omite.
 
 \Needspace{7\baselineskip}\section{Cartera y Fama--French de tres factores}
 \begin{equation*}
@@ -321,6 +331,8 @@ FF3 & 60 & 0,5110 & 0,4848 & -221,82 & -213,44 \\
 \endgroup
 \par\medskip
 \end{minipage}\par\medskip
+La beta de mercado estimada pasa de 0,7888 en el CAPM a 0,7425 en FF3, donde se estima manteniendo constantes SMB y HML. La diferencia describe el cambio de especificación sobre la misma muestra.
+
 Los signos estimados apuntan a una exposición positiva al diferencial de pequeñas frente a grandes y negativa al diferencial de valor. Ambos intervalos de confianza incluyen cero, por lo que la evidencia individual al 5 \% es insuficiente para atribuir a la cartera una orientación por tamaño o estilo.
 
 Los valores p de SMB (0,4545) y HML (0,2832) corresponden a contrastes individuales. La comparación utiliza las mismas observaciones en ambos modelos.

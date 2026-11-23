@@ -113,7 +113,7 @@ CAPM: @@CAPM_ADJ@@\par FF3: @@FF_ADJ@@\par\vspace{4mm}
 \textbf{SMB}\, Pequeñas menos grandes.\par\vspace{2mm}
 \textbf{HML}\, Alto menos bajo valor contable/mercado.
 \end{column}\end{columns}
-\captionline{@@FACTOR_FINDING@@. Las barras muestran IC del 95\,\% para las exposiciones condicionales.}
+\captionline{Beta de mercado: CAPM @@PORTFOLIO_BETA@@, FF3 @@FF_MARKET@@. @@FACTOR_FINDING@@. Barras: IC del 95\,\%.}
 }
 \section{Conclusiones}
 \slide{@@CONCLUSION_TITLE@@}{
@@ -132,7 +132,7 @@ CAPM: @@CAPM_ADJ@@\par FF3: @@FF_ADJ@@\par\vspace{4mm}
 \backtable{\begin{tabular}{lrrrrr}\toprule Activo & $\alpha$ mes (\%) & $p_\alpha$ & $\beta$ & $p_\beta$ & $R^2$\\\midrule
 @@CAPM_ROWS@@
 \bottomrule\end{tabular}}
-\captionline{OLS con intercepto, @@NRETURNS@@ meses. IC95\% de alfa y beta: diapositiva 6. Tablas completas: CAPM del Excel y capm.csv.}
+\captionline{$p_\alpha$: desviación media frente al CAPM. $p_\beta$: sensibilidad a la prima bursátil de EE. UU. $R^2$: proporción de variación explicada. IC del 95\,\% en la diapositiva 6.}
 }
 \slide{A2 · OLS frente a HAC}{
 \backtable{\begin{tabular}{lrrr}\toprule Activo & $p_\alpha$ OLS & $p_\alpha$ HAC & IC95\% HAC de $\alpha$ (\%/mes)\\\midrule

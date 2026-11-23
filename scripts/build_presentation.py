@@ -222,7 +222,7 @@ def content_values(config, run, data):
         'PORTFOLIO_BETA':decimal(b.loc['Cartera','coefficient'],4),
         'WEIGHTED_BETA':decimal(weighted_beta,4), 'FF_DF':residual_df,
         'FF_F':decimal(joint_f,4), 'FF_JOINT_P':probability(fisher_f.sf(joint_f,2,residual_df)),
-        'FF_MARKET':decimal(ff.loc['Mkt-RF','coefficient'],3),
+        'FF_MARKET':decimal(ff.loc['Mkt-RF','coefficient'],4),
         'CORR_GOLD_NIKE':decimal(data['correlations'].loc['Oro PPFB','Nike'],3)}
     values['CAPM_ROWS']=rows([[tex_escape(n),decimal(a.loc[n,'coefficient']*100),probability(a.loc[n,'p_value']),
         decimal(b.loc[n,'coefficient'],3),probability(b.loc[n,'p_value']),decimal(a.loc[n,'r_squared'],3)] for n in names])
